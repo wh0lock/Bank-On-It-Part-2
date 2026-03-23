@@ -1,4 +1,4 @@
-# Bank-On-It-Part-1
+# Bank-On-It-Part-2
 
 ## Classes implemented during part 1: 
 ```
@@ -87,7 +87,7 @@ class Bank implements HasMenu
   void loadSampleCustomers()
   void saveCustomers()
   void loadCustomers()
-  viod reportAllUsers()
+  void reportAllUsers()
   void addUser()
   void applyInterest()
   void loginAsCustomer()
@@ -96,17 +96,51 @@ class Bank implements HasMenu
   void startAdmin()
  ----------------
 ```
-Milestone 1: 
-  - Git repo
-  - Create HasMenu interface
-  - Get basic functionality of CheckingAccount class working
+Task One: Admin
+  - build the Admin class
+  - extends user, login functionality already written
+  - constructor sets default username and pin values
+  - start() method but leave blank
+  - getReport() method, not used, report admin name and PIN
 
-Milestone 2: 
-  - Finish working on CheckingAccount if necessary
-  - Implement and test SavingsAccount
-  - Start working on User class
+ Task Two: Bank Essentials
+  - get basic version of Bank up and running
+  - implements HasMenu, needs start() and menu() methods
+  - two instance variables
+    - single instance of Admin
+    - an ArrayList of Customers (or class that extends one)
+  - menu() method, main menu of the Bank
+  - start() method, Bank menu input handling
+  
+  Task Three: Implement Admin Menus and Customer Login
+  - details (the MEAT of the project)
+  - adminStart() method added to Bank class
+    - calls admin menu and handles resulting tasks
+  - add ability to login as customer
+    - method in Bank class
+    - asks for UserName and PIN
+    - instance of Customer set to null
+    - go thru every customer in the customerList
+      - if you can log in to that customer, 
+        - set currentCustomer to that customer
+        - activate start() method of that customer
+    - if you get through list without a successful login, tell user
+  - Add admin methods to Bank class
+    - fullCustomerReport()
+      - step thru each customer in list
+      - print the getReport() value from that customer
+    - addUser()
+      - ask user for a userName and a PIN
+      - create customer with that information
+      - add that customer to the end of the customer list
+    - applyInterest()
+      - go through each customer in the list
+      - apply the calcInterest() method of the savings account for that customer
 
-Milestone 3:
-  - Finish User class
-  - Implement and test Customer
-  - (Note: you'll need to test User to test Customer)
+  Task Four: Implement Serialization
+    - create a saveCustomers() method in Bank
+    - create a loadCustomers() method in Bank
+    - modify the Bank constructor to save and load the data
+      - on first pass, create and save the default data for testing purposes
+      - after initial save is tested, comment out these lines, but you may want to keep them around for retesting
+    - test everything to make sure it's all working
