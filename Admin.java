@@ -1,36 +1,43 @@
 import java.util.*;
 import java.io.*;
 
-public class Admin extends User{
+public class Admin extends User implements HasMenu, Serializable{
+
+  public static void main(String[] args) {
+    Admin a = new Admin();
+    a.login();
+  } // end main
+
   public Admin(){
-    String userName = "admin";
-    String PIN = "0000";
-    this.userName = userName;
-    this.PIN = PIN;
+    this.userName = "admin";
+    this.PIN = "0000";
   } // end constructor
 
   public String menu(){
     Scanner input = new Scanner(System.in);
+    System.out.println("  Admin Menu  ");
+    System.out.println();
     System.out.println("0) Exit");
     System.out.println("1) Full customer report");
     System.out.println("2) Add user");
     System.out.println("3) Apply interest to savings accounts");
     System.out.println();
     System.out.print("Action: ");
+
     String response = input.nextLine();
     return response;
   } // end menu
 
   public void start(){
-    
+    // implemented in Bank
   } // end start
 
   public String getReport(){
-    Scanner input = new Scanner(System.in);
-    System.out.println("Admin report");
-    String report = input.nextLine();
-    System.out.println("User: " + userName + "PIN: " + PIN);
+    String report = "Admin user name: " + this.getUserName();
+    report += ", Admin PIN: " + this.getPIN();
+
     return report;
   } // end getReport
+
 } // end Admin
 
