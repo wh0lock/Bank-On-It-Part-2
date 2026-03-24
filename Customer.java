@@ -1,21 +1,29 @@
 import java.util.*;
 import java.io.*;
 
-public class Customer extends User{
+public class Customer extends User implements Serializable {
+  static final long serialVersionUID = 1L;
+
   CheckingAccount checking = new CheckingAccount();
   SavingsAccount savings = new SavingsAccount();
 
   public static void main(String[] args){
     Customer cu = new Customer();
-    cu.start();
+    if (cu.login()){
+      System.out.println("Login was successful!");
+      cu.start();
+    } // end if
   } // end main
 
   public Customer(){
-    String userName = "Alice";
-    String PIN = "0000";
+    this.userName = "Alice";
+    this.PIN = "1111";
+  } // end constructor
+
+  public Customer(String userName, String PIN){
     this.userName = userName;
     this.PIN = PIN;
-  } // end constructor
+  } // end Customer
 
   public String menu(){
     Scanner input = new Scanner(System.in);
@@ -32,6 +40,7 @@ public class Customer extends User{
   public void start(){
     boolean keepGoing = true;
     String response;
+
     while(keepGoing){
       response = menu();
       if (response.equals("0")){
@@ -42,18 +51,17 @@ public class Customer extends User{
         } else if (response.equals("2")){
             System.out.println("Savings Account");
             savings.start();
-          } else if (response.equals("3")){
+         } else if (response.equals("3")){
               System.out.println("Changing PIN...");
               this.changePin();
-            } // end if
+           } // end if
     } // end while
   } // end start
   
   public String getReport(){
-    Scanner input = new Scanner(System.in);
-    System.out.println("Report all users");
-    String report = input.nextLine();
-    System.out.println("User: " + userName + "Checking: " + checking.getBalance() + "Savings: " + savings.getBalance());
+    String report = "User: " + this.getUserName();
+    report += ", Checking: " + this.checking.getBalanceString();
+    report += ", Savings: " + this.savings.getBalanceString();
     return report;
   } // end getReport
   
