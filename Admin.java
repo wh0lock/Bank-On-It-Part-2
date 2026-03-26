@@ -15,11 +15,12 @@ public class Admin extends User implements HasMenu, Serializable{
 
   public String menu(){
     Scanner input = new Scanner(System.in);
+    System.out.println();
     System.out.println("  Admin Menu  ");
     System.out.println();
     System.out.println("0) Exit");
     System.out.println("1) Full customer report");
-    System.out.println("2) Add user");
+    System.out.println("2) Add customer");
     System.out.println("3) Apply interest to savings accounts");
     System.out.println();
     System.out.print("Action: ");
